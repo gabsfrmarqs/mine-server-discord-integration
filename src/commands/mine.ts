@@ -41,9 +41,15 @@ export class GroupExample {
   let javaData = await getServerStatus("https://api.mcsrvstat.us/3/minecraft.marquesgabriel.dev");
   let bedrockData = await getServerStatus("https://api.mcsrvstat.us/bedrock/3/bedrock.marquesgabriel.dev:25565");
   
+  
   const unixtime = Math.floor(Date.now() / 1000);
   let ultimaChecagem = Math.floor(unixtime - javaData.debug.cachetime);
 
+  if (javaData.online !== true){
+    await interaction.reply(`Servidor offline! Ultima verificação ocorreu ${ultimaChecagem} segundos atrás.
+        \nAguarde ${300 - ultimaChecagem} segundos para tentar novamente.`);
+    return;
+  }
 
   let playersList = [];
   let playersString = `${javaData.players.online}/${javaData.players.max}`
@@ -51,11 +57,7 @@ export class GroupExample {
     playersString += `\n${javaData.players.list[i].name}`;
   }
   
-  if (javaData.online === false){
-    await interaction.reply(`Servidor offline! Ultima verificação ocorreu ${ultimaChecagem} segundos atrás.
-        \nAguarde ${300 - ultimaChecagem} segundos para tentar novamente.`);
-    return;
-  }
+  
   const iconPath = base64toPng(javaData.icon);
   const file = new AttachmentBuilder(iconPath, { name: 'server-icon.png' });
   const attachment = new AttachmentBuilder(iconPath, { name: 'server-icon.png' });
