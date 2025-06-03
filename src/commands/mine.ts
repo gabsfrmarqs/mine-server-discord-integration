@@ -8,10 +8,10 @@ import { writeFileSync } from "fs";
 //let javaData = ""
 
 async function getServerStatus(url: string){
-    const requestOptions = {
+    const requestOptions: RequestInit = {
         method: "GET",
-        redirect: "follow"
-      };
+        redirect: "follow" as RequestRedirect
+    };
       
     let fetchResponse = await fetch(url, requestOptions);
     const status = await fetchResponse.json();
@@ -40,10 +40,10 @@ export class GroupExample {
   // Java Server data
   let javaData = await getServerStatus("https://api.mcsrvstat.us/3/minecraft.marquesgabriel.dev");
   let bedrockData = await getServerStatus("https://api.mcsrvstat.us/bedrock/3/bedrock.marquesgabriel.dev:25565");
-  var unixtime = String(Date.now() / 1000);
   
-  var unixtime = String(Date.now() / 1000);
+  const unixtime = Math.floor(Date.now() / 1000);
   let ultimaChecagem = Math.floor(unixtime - javaData.debug.cachetime);
+
 
   let playersList = [];
   let playersString = `${javaData.players.online}/${javaData.players.max}`
