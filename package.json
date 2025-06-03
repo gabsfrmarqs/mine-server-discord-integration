@@ -1,0 +1,36 @@
+{
+  "name": "bags-server",
+  "version": "1.0.0",
+  "private": true,
+  "license": "MIT",
+  "type": "module",
+  "main": "build/main.js",
+  "scripts": {
+    "build": "tsc",
+    "dev": "node --loader ts-node/esm/transpile-only src/main.ts",
+    "start": "node build/main.js",
+    "watch": "nodemon --exec npm run dev --watch src --ext ts"
+  },
+  "dependencies": {
+    "@discordx/importer": "^1.3.1",
+    "@discordx/pagination": "^3.5.5",
+    "discord.js": "^14.17.3",
+    "discordx": "^11.12.2",
+    "dotenv": "^16.5.0",
+    "rcon": "^1.1.0",
+    "rcon-client": "^4.2.5",
+    "ts-rcon": "^1.2.1",
+    "working-rcon": "^0.2.8"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.10",
+    "nodemon": "^3.1.9",
+    "prettier": "^3.4.2",
+    "ts-node": "^10.9.2",
+    "typescript": "5.7.3"
+  },
+  "engines": {
+    "node": ">=16.0.0",
+    "npm": ">=7.0.0"
+  }
+}
